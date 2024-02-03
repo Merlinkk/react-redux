@@ -5,19 +5,18 @@
     import { createStore,  } from 'redux'
     import { incrementLike, decrementLike } from './Actions'
 
-    const store = createStore(reducer, {likes: 0})
+    const store = createStore(reducer)
 
     function LikeCounter() {
 
+        // display like workaround using useState and subscribe
         const [likes, setLikes] = useState(store.getState().likes);
 
-        useEffect(() => {
-            const subscribe = store.subscribe(() => {
+            store.subscribe(() => {
             setLikes(store.getState().likes);
           });
-          return subscribe;
-        }, []);
 
+        // []
 
         function like(){
             store.dispatch(incrementLike())
